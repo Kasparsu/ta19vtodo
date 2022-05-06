@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\ItemController::class, 'index']);
+Route::get('/{code}', [\App\Http\Controllers\ItemController::class, 'code']);
+Route::post('/{code}', [\App\Http\Controllers\ItemController::class, 'store']);
+Route::get('/item/{item}/delete', [\App\Http\Controllers\ItemController::class, 'destroy']);
