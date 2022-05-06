@@ -23,11 +23,25 @@
             <input type="submit" class="button is-primary" value="Add">
         </form>
         @foreach($items as $item)
-            <div class="box">
-                {{$item->title}} <a class="button is-danger" href="/item/{{$item->id}}/delete">Its done</a>
+            <div class="box" >
+                @if(request()->input('edit') == $item->id)
+                <form class="box" action="/item/{{$item->id}}" method="POST">
+                    @csrf
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" name="item" type="text" value="{{$item->title}}">
+                        </div>
+                    </div>
+                    <input type="submit" class="button is-warning" value="Change">
+                </form>
+                        
+                @else
+                <span>{{$item->title}}</span> <a class="button is-danger" href="/item/{{$item->id}}/delete">Its done</a><a class="button is-warning" href="/{{$code}}?edit={{$item->id}}">Edit</a>
+                @endif
             </div>
         @endforeach
     </div>
+
 </section>
 </body>
 </html>

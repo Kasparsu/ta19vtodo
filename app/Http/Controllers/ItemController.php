@@ -61,7 +61,9 @@ class ItemController extends Controller
      */
     public function update(UpdateItemRequest $request, Item $item)
     {
-
+        $item->title = $request->input('item');
+        $item->save();
+        return redirect('/');
     }
 
     /**
